@@ -1,13 +1,29 @@
 {
   
   "name": "ai-chatbot-server",
+  
   "version": "1.0.0",
-"type": "module",
+  
+  "type": "module",
+  
   "main": "server.js",
+  
   "dependencies": {
-    "cors": "^2.8.6",
-    "dotenv": "^17.3.1",
-    "express": "^4.22.1",
-    "openai": "^4.104.0"
+  
+    
+  "@google/generative-ai": "^0.24.1",
+  
+    
+  "cors": "^2.8.6",
+  
+    
+  "dotenv": "^17.3.1",
+  
+    
+  "express": "^4.22.1",
+  
+    
+  "openai": "^4.104.0"
+  
   }
 }
