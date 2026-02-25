@@ -8,6 +8,10 @@ app.use(express.json());
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+app.get("/", (req, res) => {
+  res.send("🚀 AI Chatbot Server Running");
+});
+
 app.post("/chat", async (req, res) => {
   try {
     const { message } = req.body;
