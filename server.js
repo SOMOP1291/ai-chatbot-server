@@ -1,36 +1,34 @@
 import express from "express";
-import cors from "cors";
+import dotenv from "dotenv";
 import OpenAI from "openai";
-import 'dotenv/config';
+
+dotenv.config();
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+app.get("/", (req, res) => {
+  res.send("AI Agent Running 🚀");
 });
 
 app.post("/chat", async (req, res) => {
+  const { message } = req.body;
 
-  try {
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "user", content: req.body.message }
-      ]
-    });
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [{ role: "user", content: message }],
+  });
 
-    res.json({
-      reply: completion.choices[0].message.content
-    });
-
-  } catch (error) {
-    res.status(500).json({ reply: "AI error" });
-  }
+  res.json({
+    reply: response.choices[0].message.content,
+  });
 });
 
-app.listen(3000, () =>
-  console.log("AI server running on http://localhost:3000")
-);
-
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
