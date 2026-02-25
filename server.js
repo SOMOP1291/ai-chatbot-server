@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import OpenAI from "openai";
+import 'dotenv/config';
 
 const app = express();
 app.use(cors());
@@ -32,3 +33,4 @@ app.post("/chat", async (req, res) => {
 app.listen(3000, () =>
   console.log("AI server running on http://localhost:3000")
 );
+
